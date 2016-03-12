@@ -16,7 +16,7 @@ public class Q1 {
 		
 		Configuration conf = new Configuration();	
 		FileSystem fs = FileSystem.get(conf);
-		Path outputPath = new Path("UJG/OP1");
+		Path outputPath = new Path(args[0]);
 		
 		if (fs.exists(outputPath))
 			fs.delete(outputPath, true);
@@ -28,8 +28,8 @@ public class Q1 {
 		job.setOutputKeyClass(Text.class);		
 		job.setOutputValueClass(Text.class);
 		
-		MultipleInputs.addInputPath(job, new Path("UJG/yelpdatafall/business/business.csv"), TextInputFormat.class, BusinessAddressMapper.class);
-		MultipleInputs.addInputPath(job, new Path("UJG/yelpdatafall/review/review.csv"), TextInputFormat.class, ReviewMapper.class);
+		MultipleInputs.addInputPath(job, new Path(args[1]), TextInputFormat.class, BusinessAddressMapper.class);
+		MultipleInputs.addInputPath(job, new Path(args[2]), TextInputFormat.class, ReviewMapper.class);
 				
 		job.setReducerClass(JoinReducer.class);
 		
